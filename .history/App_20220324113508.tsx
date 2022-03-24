@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   modal: {
     ...StyleSheet.absoluteFillObject,
     width: Dimensions.get('window').width - 100,
-    margin: 50,
+    marginHorizontal: 50,
     borderRadius: 20,
     backgroundColor: 'pink',
     justifyContent: 'center',

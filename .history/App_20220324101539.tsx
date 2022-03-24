@@ -6,7 +6,6 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {
-  Dimensions,
   Pressable,
   StyleSheet,
   Text,
@@ -64,10 +63,9 @@ function DetailsScreen({navigation}: DetailsScreenProps) {
   const onClick = useCallback(() => {
     navigation.navigate('Home');
   }, [navigation]);
-  const onPress = () => {
-    setShowModal(!showModal);
-  };
-  const [showModal, setShowModal] = React.useState(false);
+  const onPress = useCallback(() => {
+    navigation.navigate('Home');
+  }, [navigation]);
   return (
     <>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -90,17 +88,25 @@ function DetailsScreen({navigation}: DetailsScreenProps) {
           <Text>Modal</Text>
         </Pressable>
       </View>
-      {showModal && (
-        <>
-          <Pressable onPress={onPress} style={styles.modalOuter} />
-          <View style={styles.modal}>
-            <Text>Hello modal</Text>
-            <Pressable style={styles.modalInner} onPress={onPress}>
-              <Text style={{fontSize: 20}}>X</Text>
-            </Pressable>
-          </View>
-        </>
-      )}
+      <View
+        style={{
+          backgroundColor: 'transparent',
+          ...StyleSheet.absoluteFillObject,
+          padding: 20,
+        }}>
+        <View
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            padding: 20,
+            margin: 40,
+            borderRadius: 20,
+            backgroundColor: 'pink',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text>Hello modal</Text>
+        </View>
+      </View>
     </>
   );
 }
@@ -122,43 +128,5 @@ function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  modal: {
-    ...StyleSheet.absoluteFillObject,
-    width: Dimensions.get('window').width - 100,
-    margin: 50,
-    borderRadius: 20,
-    backgroundColor: 'pink',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
-    shadowOffset: {width: 5, height: 5},
-    elevation: 10,
-  },
-  modalInner: {
-    position: 'absolute',
-    backgroundColor: 'wheat',
-    width: 30,
-    height: 30,
-    borderRadius: 20,
-    top: 20,
-    right: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    shadowOffset: {width: 2, height: 2},
-    elevation: 10,
-  },
-  modalOuter: {
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    ...StyleSheet.absoluteFillObject,
-    padding: 20,
-  },
-});
 
 export default App;

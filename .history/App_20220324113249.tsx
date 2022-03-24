@@ -125,9 +125,11 @@ function App() {
 
 const styles = StyleSheet.create({
   modal: {
-    ...StyleSheet.absoluteFillObject,
+    position: 'absolute',
     width: Dimensions.get('window').width - 100,
-    margin: 50,
+    marginHorizontal: 50,
+    height: 450,
+    marginVertical: Dimensions.get('window').height * 0.1,
     borderRadius: 20,
     backgroundColor: 'pink',
     justifyContent: 'center',

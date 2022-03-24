@@ -6,7 +6,6 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {
-  Dimensions,
   Pressable,
   StyleSheet,
   Text,
@@ -92,10 +91,17 @@ function DetailsScreen({navigation}: DetailsScreenProps) {
       </View>
       {showModal && (
         <>
-          <Pressable onPress={onPress} style={styles.modalOuter} />
+          <Pressable
+            onPress={onPress}
+            style={{
+              backgroundColor: 'rgba(0,0,0,0.4)',
+              ...StyleSheet.absoluteFillObject,
+              padding: 20,
+            }}
+          />
           <View style={styles.modal}>
             <Text>Hello modal</Text>
-            <Pressable style={styles.modalInner} onPress={onPress}>
+            <Pressable style={{}} onPress={onPress}>
               <Text style={{fontSize: 20}}>X</Text>
             </Pressable>
           </View>
@@ -126,17 +132,12 @@ function App() {
 const styles = StyleSheet.create({
   modal: {
     ...StyleSheet.absoluteFillObject,
-    width: Dimensions.get('window').width - 100,
+    padding: 20,
     margin: 50,
     borderRadius: 20,
     backgroundColor: 'pink',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
-    shadowOffset: {width: 5, height: 5},
-    elevation: 10,
   },
   modalInner: {
     position: 'absolute',
@@ -148,16 +149,6 @@ const styles = StyleSheet.create({
     right: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    shadowOffset: {width: 2, height: 2},
-    elevation: 10,
-  },
-  modalOuter: {
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    ...StyleSheet.absoluteFillObject,
-    padding: 20,
   },
 });
 
