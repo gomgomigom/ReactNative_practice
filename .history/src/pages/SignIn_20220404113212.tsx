@@ -14,54 +14,33 @@ import DismissKeyboardView from '../components/DismissKeyboardView';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
-function SignUp({navigation}: SignInScreenProps) {
+function SignIn({navigation}: SignInScreenProps) {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const emailRef = useRef<TextInput | null>(null);
-  const nameRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
   const onSubmit = useCallback(() => {
     if (!email || !email.trim()) {
       return Alert.alert('알림', 'Please enter your email address');
     }
-    if (!name || !name.trim()) {
-      return Alert.alert('알림', 'Please enter your name');
-    }
     if (!password || !password.trim()) {
       return Alert.alert('알림', 'Please enter your password');
     }
-    if (
-      !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(
-        email,
-      )
-    ) {
-      return Alert.alert('알림', '올바른 이메일 주소가 아닙니다');
-    }
-    if (!/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%%^&*]).{8,20}$/.test(password)) {
-      return Alert.alert(
-        '알림',
-        '비밀번호는 특수문자(!@#$%^&*), 숫자, 영문을 포함하여 8자 이상 되어야 합니다.',
-      );
-    }
-    Alert.alert('알림', '회원가입 되었습니다.');
-  }, [email, name, password]);
+    Alert.alert('알림', '안녕~ 로그인 되었습니다~');
+  }, [email, password]);
   const onChangeEmail = useCallback(text => {
     setEmail(text.trim());
-  }, []);
-  const onChangeName = useCallback(text => {
-    setName(text.trim());
   }, []);
   const onChangePassword = useCallback(text => {
     setPassword(text.trim());
   }, []);
-  const canGoNext = email && password && name;
+  const canGoNext = email && password;
   const toSignUp = useCallback(() => {
     navigation.navigate('SignUp');
   }, [navigation]);
 
   return (
-    <DismissKeyboardView>
+    <DismissKeyboardView behavior="position">
       <View style={styles.textWrapper}>
         <Text style={styles.label}>이메일(아이디)</Text>
         <TextInput
@@ -75,28 +54,10 @@ function SignUp({navigation}: SignInScreenProps) {
           keyboardType="email-address"
           returnKeyType="next"
           onSubmitEditing={() => {
-            nameRef.current?.focus();
-          }}
-          blurOnSubmit={false}
-          ref={emailRef}
-          clearButtonMode="while-editing"
-        />
-        <Text style={styles.label}>이름</Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder="이름"
-          value={name}
-          onChangeText={onChangeName}
-          importantForAutofill="yes"
-          autoComplete="name"
-          textContentType="name"
-          keyboardType="default"
-          returnKeyType="next"
-          onSubmitEditing={() => {
             passwordRef.current?.focus();
           }}
           blurOnSubmit={false}
-          ref={nameRef}
+          ref={emailRef}
           clearButtonMode="while-editing"
         />
         <Text style={styles.label}>비밀번호</Text>
@@ -126,7 +87,7 @@ function SignUp({navigation}: SignInScreenProps) {
               : styles.loginButton
           }
           disabled={!canGoNext}>
-          <Text style={styles.loginButtonText}>회원가입</Text>
+          <Text style={styles.loginButtonText}>로그인</Text>
         </Pressable>
         <Pressable onPress={toSignUp}>
           <Text style={styles.signUp}>회원가입</Text>
@@ -176,4 +137,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default SignIn;

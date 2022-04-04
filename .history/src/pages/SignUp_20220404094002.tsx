@@ -1,6 +1,5 @@
 import {
   Alert,
-  KeyboardAvoidingView,
   Pressable,
   StyleSheet,
   Text,
@@ -10,7 +9,6 @@ import {
 import React, {useCallback, useRef, useState} from 'react';
 import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import DismissKeyboardView from '../components/DismissKeyboardView';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -38,10 +36,10 @@ function SignUp({navigation}: SignInScreenProps) {
     ) {
       return Alert.alert('알림', '올바른 이메일 주소가 아닙니다');
     }
-    if (!/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%%^&*]).{8,20}$/.test(password)) {
+    if (!/.*/.text(password)) {
       return Alert.alert(
         '알림',
-        '비밀번호는 특수문자(!@#$%^&*), 숫자, 영문을 포함하여 8자 이상 되어야 합니다.',
+        '비밀번호는 특수문자, 숫자, 알파벳 소문자가 포함되어야 합니다.',
       );
     }
     Alert.alert('알림', '회원가입 되었습니다.');
@@ -61,7 +59,7 @@ function SignUp({navigation}: SignInScreenProps) {
   }, [navigation]);
 
   return (
-    <DismissKeyboardView>
+    <View>
       <View style={styles.textWrapper}>
         <Text style={styles.label}>이메일(아이디)</Text>
         <TextInput
@@ -109,7 +107,7 @@ function SignUp({navigation}: SignInScreenProps) {
           importantForAutofill="yes"
           autoComplete="password"
           textContentType="password"
-          keyboardType="default"
+          keyboardType="phone-pad"
           onSubmitEditing={() => {
             onSubmit();
           }}
@@ -132,7 +130,7 @@ function SignUp({navigation}: SignInScreenProps) {
           <Text style={styles.signUp}>회원가입</Text>
         </Pressable>
       </View>
-    </DismissKeyboardView>
+    </View>
   );
 }
 

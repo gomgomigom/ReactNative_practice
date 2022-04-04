@@ -1,6 +1,5 @@
 import {
   Alert,
-  KeyboardAvoidingView,
   Pressable,
   StyleSheet,
   Text,
@@ -10,7 +9,6 @@ import {
 import React, {useCallback, useRef, useState} from 'react';
 import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import DismissKeyboardView from '../components/DismissKeyboardView';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -61,7 +59,7 @@ function SignUp({navigation}: SignInScreenProps) {
   }, [navigation]);
 
   return (
-    <DismissKeyboardView>
+    <View>
       <View style={styles.textWrapper}>
         <Text style={styles.label}>이메일(아이디)</Text>
         <TextInput
@@ -109,7 +107,7 @@ function SignUp({navigation}: SignInScreenProps) {
           importantForAutofill="yes"
           autoComplete="password"
           textContentType="password"
-          keyboardType="default"
+          keyboardType="phone-pad"
           onSubmitEditing={() => {
             onSubmit();
           }}
@@ -132,7 +130,7 @@ function SignUp({navigation}: SignInScreenProps) {
           <Text style={styles.signUp}>회원가입</Text>
         </Pressable>
       </View>
-    </DismissKeyboardView>
+    </View>
   );
 }
 
