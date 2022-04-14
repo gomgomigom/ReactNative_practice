@@ -52,15 +52,9 @@ function SignUp({navigation}: SignInScreenProps) {
     console.log(email, name, password);
     try {
       setLoading(true);
-      const response = await axios.post(
-        'http://10.0.2.2:3105/user',
-        {email, name, password},
-        // {
-        //   headers: {
-        //     token: '고유한 값',
-        //   },
-        // },
-      );
+      const response = await axios.post('/user', {email, name, password}, headers: {
+        token: '고유한 값',
+      });
       console.log(response);
       Alert.alert('알림', '회원가입 되었습니다.');
     } catch (error) {
@@ -154,7 +148,7 @@ function SignUp({navigation}: SignInScreenProps) {
           }
           disabled={!canGoNext || loading}>
           {loading ? (
-            <ActivityIndicator color="white" />
+            <ActivityIndicator />
           ) : (
             <Text style={styles.loginButtonText}>회원가입</Text>
           )}

@@ -53,7 +53,7 @@ function SignUp({navigation}: SignInScreenProps) {
     try {
       setLoading(true);
       const response = await axios.post(
-        'http://10.0.2.2:3105/user',
+        '10.0.2.2:3105/user',
         {email, name, password},
         // {
         //   headers: {

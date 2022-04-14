@@ -1,5 +1,4 @@
 import {
-  ActivityIndicator,
   Alert,
   Pressable,
   StyleSheet,
@@ -11,7 +10,7 @@ import React, {useCallback, useRef, useState} from 'react';
 import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import DismissKeyboardView from '../components/DismissKeyboardView';
-import axios, {Axios, AxiosError} from 'axios';
+import axios, {Axios} from 'axios';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -24,9 +23,6 @@ function SignUp({navigation}: SignInScreenProps) {
   const nameRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
   const onSubmit = useCallback(async () => {
-    if (loading) {
-      return;
-    }
     if (!email || !email.trim()) {
       return Alert.alert('알림', 'Please enter your email address');
     }
@@ -51,28 +47,14 @@ function SignUp({navigation}: SignInScreenProps) {
     }
     console.log(email, name, password);
     try {
-      setLoading(true);
-      const response = await axios.post(
-        'http://10.0.2.2:3105/user',
-        {email, name, password},
-        // {
-        //   headers: {
-        //     token: '고유한 값',
-        //   },
-        // },
-      );
+      const response = await axios.post('/user', {email, name, password});
       console.log(response);
-      Alert.alert('알림', '회원가입 되었습니다.');
     } catch (error) {
-      const errorResponse = (error as AxiosError).response;
-      console.error(errorResponse);
-      if (errorResponse) {
-        Alert.alert('알림', errorResponse.data.message);
-      }
+      console.error(error.response);
     } finally {
-      setLoading(false);
     }
-  }, [loading, email, name, password]);
+    Alert.alert('알림', '회원가입 되었습니다.');
+  }, [email, name, password]);
   const onChangeEmail = useCallback(text => {
     setEmail(text.trim());
   }, []);
@@ -148,16 +130,15 @@ function SignUp({navigation}: SignInScreenProps) {
         <Pressable
           onPress={onSubmit}
           style={
-            canGoNext || loading
+            canGoNext
               ? StyleSheet.compose(styles.loginButton, styles.loginButtonActive)
               : styles.loginButton
           }
-          disabled={!canGoNext || loading}>
-          {loading ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <Text style={styles.loginButtonText}>회원가입</Text>
-          )}
+          disabled={!canGoNext}>
+          <Text style={styles.loginButtonText}>회원가입</Text>
+        </Pressable>
+        <Pressable onPress={toSignUp}>
+          <Text style={styles.signUp}>회원가입</Text>
         </Pressable>
       </View>
     </DismissKeyboardView>

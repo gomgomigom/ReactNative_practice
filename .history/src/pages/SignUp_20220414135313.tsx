@@ -11,7 +11,7 @@ import React, {useCallback, useRef, useState} from 'react';
 import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import DismissKeyboardView from '../components/DismissKeyboardView';
-import axios, {Axios, AxiosError} from 'axios';
+import axios, {AxiosError} from 'axios';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -52,15 +52,7 @@ function SignUp({navigation}: SignInScreenProps) {
     console.log(email, name, password);
     try {
       setLoading(true);
-      const response = await axios.post(
-        'http://10.0.2.2:3105/user',
-        {email, name, password},
-        // {
-        //   headers: {
-        //     token: '고유한 값',
-        //   },
-        // },
-      );
+      const response = await axios.post('/user', {email, name, password});
       console.log(response);
       Alert.alert('알림', '회원가입 되었습니다.');
     } catch (error) {
@@ -70,7 +62,7 @@ function SignUp({navigation}: SignInScreenProps) {
         Alert.alert('알림', errorResponse.data.message);
       }
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   }, [loading, email, name, password]);
   const onChangeEmail = useCallback(text => {
@@ -83,9 +75,6 @@ function SignUp({navigation}: SignInScreenProps) {
     setPassword(text.trim());
   }, []);
   const canGoNext = email && password && name;
-  const toSignUp = useCallback(() => {
-    navigation.navigate('SignUp');
-  }, [navigation]);
 
   return (
     <DismissKeyboardView>
@@ -154,7 +143,7 @@ function SignUp({navigation}: SignInScreenProps) {
           }
           disabled={!canGoNext || loading}>
           {loading ? (
-            <ActivityIndicator color="white" />
+            <ActivityIndicator />
           ) : (
             <Text style={styles.loginButtonText}>회원가입</Text>
           )}
