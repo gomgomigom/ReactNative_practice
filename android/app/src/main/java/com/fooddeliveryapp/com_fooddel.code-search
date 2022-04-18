@@ -1,0 +1,44 @@
+# Query: com.fooddel
+# ContextLines: 1
+
+9 results - 6 files
+
+README.md:
+  480  ```
+  481: -keep class com.gomgomigom.fooddeliveryapp.BuildConfig { *; }
+  482  ```
+
+  491          ...
+  492:         resValue "string", "build_config_package", "com.gomgomigom.fooddeliveryapp"
+  493      }
+
+android/app/_BUCK:
+  37      name = "build_config",
+  38:     package = "com.gomgomigom.fooddeliveryapp",
+  39  )
+
+  42      name = "res",
+  43:     package = "com.gomgomigom.fooddeliveryapp",
+  44      res = "src/main/res",
+
+android/app/build.gradle:
+  133      defaultConfig {
+  134:         applicationId "com.gomgomigom.fooddeliveryapp"
+  135          minSdkVersion rootProject.ext.minSdkVersion
+
+android/app/src/debug/java/com/fooddeliveryapp/ReactNativeFlipper.java:
+  6   */
+  7: package com.gomgomigom.fooddeliveryapp;
+  8  
+
+android/app/src/main/java/com/fooddeliveryapp/MainActivity.java:
+  1: package com.gomgomigom.fooddeliveryapp;
+  2  
+
+android/app/src/main/java/com/fooddeliveryapp/MainApplication.java:
+   1: package com.fooddeliveryapp;
+   2  
+
+  64          */
+  65:         Class<?> aClass = Class.forName("com.fooddeliveryapp.ReactNativeFlipper");
+  66          aClass
