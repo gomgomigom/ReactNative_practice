@@ -79,7 +79,7 @@ function SignIn({navigation}: SignInScreenProps) {
   const canGoNext = email && password;
   return (
     <DismissKeyboardView>
-      <View style={styles.textWrapper}>
+      <View style={styles.inputWrapper}>
         <Text style={styles.label}>이메일</Text>
         <TextInput
           style={styles.textInput}
@@ -97,7 +97,7 @@ function SignIn({navigation}: SignInScreenProps) {
           blurOnSubmit={false}
         />
       </View>
-      <View style={styles.textWrapper}>
+      <View style={styles.inputWrapper}>
         <Text style={styles.label}>비밀번호</Text>
         <TextInput
           style={styles.textInput}

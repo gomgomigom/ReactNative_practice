@@ -79,7 +79,7 @@ function SignIn({navigation}: SignInScreenProps) {
   const canGoNext = email && password;
   return (
     <DismissKeyboardView>
-      <View style={styles.textWrapper}>
+      <View style={styles.inputWrapper}>
         <Text style={styles.label}>이메일</Text>
         <TextInput
           style={styles.textInput}
@@ -97,7 +97,7 @@ function SignIn({navigation}: SignInScreenProps) {
           blurOnSubmit={false}
         />
       </View>
-      <View style={styles.textWrapper}>
+      <View style={styles.inputWrapper}>
         <Text style={styles.label}>비밀번호</Text>
         <TextInput
           style={styles.textInput}
@@ -137,43 +137,36 @@ function SignIn({navigation}: SignInScreenProps) {
     </DismissKeyboardView>
   );
 }
+
 const styles = StyleSheet.create({
-  loginButton: {
+  textInput: {
+    padding: 5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  inputWrapper: {
+    padding: 20,
+  },
+  label: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 20,
+  },
+  buttonZone: {
     alignItems: 'center',
-    borderRadius: 10,
-    marginVertical: 10,
-    width: 200,
-    backgroundColor: 'grey',
+  },
+  loginButton: {
+    backgroundColor: 'gray',
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
+    marginBottom: 10,
   },
   loginButtonActive: {
     backgroundColor: 'blue',
   },
   loginButtonText: {
-    fontSize: 30,
     color: 'white',
-  },
-  buttonZone: {
-    alignItems: 'center',
-  },
-  label: {
-    marginTop: 25,
-    marginHorizontal: 10,
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-  textInput: {
-    marginTop: 20,
     fontSize: 16,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  textWrapper: {
-    padding: 20,
-  },
-  signUp: {
-    fontSize: 16,
-    padding: 20,
   },
 });
 

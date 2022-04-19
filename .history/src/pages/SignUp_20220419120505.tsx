@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React, {useCallback, useRef, useState} from 'react';
-import {RootStackParamList} from '../../AppInner';
+import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import DismissKeyboardView from '../components/DismissKeyboardView';
 import axios, {AxiosError} from 'axios';
@@ -86,6 +86,9 @@ function SignUp({navigation}: SignInScreenProps) {
     setPassword(text.trim());
   }, []);
   const canGoNext = email && password && name;
+  const toSignUp = useCallback(() => {
+    navigation.navigate('SignUp');
+  }, [navigation]);
 
   return (
     <DismissKeyboardView>
