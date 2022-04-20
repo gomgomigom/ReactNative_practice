@@ -65,7 +65,7 @@ function SignUp({navigation}: SignInScreenProps) {
       );
       console.log(response);
       Alert.alert('알림', '회원가입 되었습니다.');
-      navigation.navigate('SignIn');
+      navigation.navigate('SingUp');
     } catch (error) {
       const errorResponse = (error as AxiosError).response;
       console.error(errorResponse);
