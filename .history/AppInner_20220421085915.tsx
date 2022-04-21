@@ -9,8 +9,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector} from 'react-redux';
 import * as React from 'react';
-import useSocket from './src/hooks/useSocket';
-import {useEffect} from 'react';
 
 export type LoggedInParamList = {
   Orders: undefined;
