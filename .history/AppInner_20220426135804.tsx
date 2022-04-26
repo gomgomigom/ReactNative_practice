@@ -84,7 +84,7 @@ function AppInner() {
           Alert.alert('알림', '다시 로그인 해주세요.');
         }
       } finally {
-        // Todo: 스플래시 스크린 없애기
+        // todo: 스플래시 스크린 없애기
       }
     };
     getTokenAndRefresh();

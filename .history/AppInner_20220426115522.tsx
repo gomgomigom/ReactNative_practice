@@ -12,11 +12,7 @@ import * as React from 'react';
 import useSocket from './src/hooks/useSocket';
 import {useEffect} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import axios, {AxiosError} from 'axios';
-import userSlice from './src/slices/user';
-import {Alert} from 'react-native';
-import {useAppDispatch} from './src/store';
-import Config from 'react-native-config';
+import axios from 'axios';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -34,7 +30,6 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function AppInner() {
-  const dispatch = useAppDispatch();
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
   console.log('isLoggedIn', isLoggedIn);
 
@@ -83,8 +78,6 @@ function AppInner() {
         if ((error as AxiosError).response?.data.code === 'expired') {
           Alert.alert('알림', '다시 로그인 해주세요.');
         }
-      } finally {
-        // Todo: 스플래시 스크린 없애기
       }
     };
     getTokenAndRefresh();

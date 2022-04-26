@@ -83,8 +83,6 @@ function AppInner() {
         if ((error as AxiosError).response?.data.code === 'expired') {
           Alert.alert('알림', '다시 로그인 해주세요.');
         }
-      } finally {
-        // Todo: 스플래시 스크린 없애기
       }
     };
     getTokenAndRefresh();

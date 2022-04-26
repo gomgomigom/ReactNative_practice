@@ -16,7 +16,6 @@ import axios, {AxiosError} from 'axios';
 import userSlice from './src/slices/user';
 import {Alert} from 'react-native';
 import {useAppDispatch} from './src/store';
-import Config from 'react-native-config';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -83,8 +82,6 @@ function AppInner() {
         if ((error as AxiosError).response?.data.code === 'expired') {
           Alert.alert('알림', '다시 로그인 해주세요.');
         }
-      } finally {
-        // Todo: 스플래시 스크린 없애기
       }
     };
     getTokenAndRefresh();
